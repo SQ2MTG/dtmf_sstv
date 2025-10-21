@@ -33,7 +33,7 @@ import RPi.GPIO as GPIO
 
 # PL: GPIO mapowanie - dostosuj do swojego podlaczenia
 # EN: GPIO mapping - adjust to your wiring
-PIN_D0 = 5    # PL: D0 -> GPIO5  EN: D0 -> GPIO5
+PIN_D0 = 5    # PL: D0 -> GPIO5  
 PIN_D1 = 6    # D1 -> GPIO6
 PIN_D2 = 13   # D2 -> GPIO13
 PIN_D3 = 19   # D3 -> GPIO19
