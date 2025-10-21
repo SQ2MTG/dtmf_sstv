@@ -6,11 +6,9 @@
 
 #!/usr/bin/env python3
 \"\"\" 
-PL: DTMF->SSTV server dla Raspberry Pi + MT8870 z rozroznianiem krotkiego i dlugiego nacisniecia.
+PL: DTMF->SSTV server dla Raspberry Pi + MT8870 z rozroznianiem krotkiego i dlugiego tonu.
 EN: DTMF->SSTV server for Raspberry Pi + MT8870 with short vs long press handling.
 
-Komentarze sa dwujezyczne (PL/EN). Wersja polska bez polskich znakow.
-Polska czesc komentarzy nie zawiera znakow diakrytycznych.
 \"\"\"
 
 # PL: Importy
@@ -123,7 +121,7 @@ def generate_sstv_wav(image_path, wav_out, mode_key):
     mode_key = mode_key.upper()
     img = Image.open(image_path).convert('RGB')
     # Resize if needed
-    img = img.resize((320, 256))
+    img = img.resize((640, 496))
     if mode_key == \"ROBOT36\" or mode_key == \"TESTCARD1\" or mode_key == \"TESTCARD2\" or mode_key==\"STATUS_IMAGE\":
         s = Robot36(img)
     elif mode_key == \"MARTIN_M1\":
@@ -162,13 +160,13 @@ def play_wav(wav_path):
 # PL: Funkcja wyslania 'obraz kontrolny' - moze wysylac gotowy plik lub zrobic zdjecie i oznaczyc jako kontrolny.
 # EN: Send 'control image' - can send a prepared file or capture image and mark it as control.
 def send_control_image(cmd_key):
-    # PL: Przyklad: mozemy miec kilka testcardow w katalogu /opt/sstv_testcards/
-    # EN: Example: have testcards in /opt/sstv_testcards/
-    base_dir = \"/opt/sstv_testcards\"
+    # PL: Przyklad: mozemy miec kilka testcardow w katalogu /opt/dtmf_sstv/
+    # EN: Example: have testcards in /opt/dtmf_sstv/
+    base_dir = \"/opt/dtmf_sstv/"
     if cmd_key == 'TESTCARD1':
-        img = os.path.join(base_dir, 'testcard1.jpg')
+        img = os.path.join(base_dir, 'testcard1.png')
     elif cmd_key == 'TESTCARD2':
-        img = os.path.join(base_dir, 'testcard2.jpg')
+        img = os.path.join(base_dir, 'testcard2.png')
     elif cmd_key == 'STATUS_IMAGE':
         # PL: Przyklad generowania statusu: zrob zdjecie i naklada napis
         # EN: Example status: capture image and overlay text
