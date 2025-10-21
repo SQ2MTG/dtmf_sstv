@@ -1,0 +1,16 @@
+# === Python dependencies (install via pip) ===
+flask~=3.0.0              # prosty serwer HTTP / API do komunikacji i sterowania
+gpiozero~=2.0.1           # obsluga pinow GPIO na Raspberry Pi (lub kompatybilnych SBC)
+pillow~=10.4.0             # obrobka obrazow (generowanie testcard, podpisy itp.)
+numpy~=2.1.0               # operacje matematyczne (np. analiza tonu, sygnaly)
+opencv-python~=4.10.0      # (opcjonalnie) kamera, jezeli chcesz uzyc cv2 zamiast fswebcam
+sounddevice~=0.5.0         # (opcjonalnie) do dzwieku / transmisji SSTV przez audio
+pyaudio~=0.2.14            # (opcjonalnie) alternatywna biblioteka do nagrywania / dzwieku
+pyserial~=3.5              # komunikacja przez UART / radio
+requests~=2.32.3           # do ewentualnych zapytan HTTP, np. zdalne sterowanie
+
+# === System dependencies (install via apt) ===
+# sudo apt update
+# sudo apt install fswebcam sox python3-gpiozero python3-opencv python3-pil python3-flask
+# (opcjonalnie)
+# sudo apt install python3-pyaudio python3-numpy python3-requests

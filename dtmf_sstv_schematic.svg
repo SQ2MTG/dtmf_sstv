@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="900" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <style>
+    .label { font-family: Arial, Helvetica, sans-serif; font-size:14px; }
+    .title { font-family: Arial, Helvetica, sans-serif; font-size:18px; font-weight:bold; }
+    .pin { font-family: monospace; font-size:12px; }
+    .box { fill:#f8f8f8; stroke:#222; stroke-width:2px; }
+    .wire { stroke:#004; stroke-width:2px; fill:none; }
+    .gnd { stroke:#800; stroke-width:2px; fill:none; }
+  </style>
+
+  <rect x="20" y="20" width="1160" height="860" rx="8" ry="8" fill="#ffffff" stroke="#000" />
+  <text x="40" y="50" class="title">Schematic: Raspberry Pi + MT8870 + USB Camera + USB Soundcard + PTT (for printing)</text>
+
+  <!-- Raspberry Pi box -->
+  <rect x="50" y="80" width="420" height="360" class="box"/>
+  <text x="70" y="110" class="label">Raspberry Pi (GPIO BCM)</text>
+  <text x="70" y="140" class="pin">GPIO5  - D0</text>
+  <text x="70" y="160" class="pin">GPIO6  - D1</text>
+  <text x="70" y="180" class="pin">GPIO13 - D2</text>
+  <text x="70" y="200" class="pin">GPIO19 - D3</text>
+  <text x="70" y="220" class="pin">GPIO26 - Strobe (Data Ready)</text>
+  <text x="70" y="240" class="pin">GPIO21 - PTT control (to transistor base via 1k)</text>
+  <text x="70" y="260" class="pin">GND    - common ground</text>
+  <text x="70" y="280" class="pin">USB-A  - USB Camera</text>
+  <text x="70" y="300" class="pin">USB-B  - USB Soundcard</text>
+
+  <!-- MT8870 box -->
+  <rect x="520" y="80" width="320" height="220" class="box" />
+  <text x="540" y="110" class="label">MT8870 DTMF Decoder Module</text>
+  <text x="540" y="140" class="pin">VCC (5V)</text>
+  <text x="540" y="160" class="pin">GND</text>
+  <text x="540" y="180" class="pin">IN (audio in)</text>
+  <text x="540" y="200" class="pin">D0</text>
+  <text x="540" y="220" class="pin">D1</text>
+  <text x="680" y="220" class="pin">D2</text>
+  <text x="680" y="200" class="pin">D3</text>
+  <text x="540" y="240" class="pin">StD (Data strobe)</text>
+
+  <!-- Level shifter / dividers note -->
+  <rect x="860" y="80" width="330" height="120" class="box" />
+  <text x="880" y="110" class="label">Level shifting (5V -> 3.3V)</text>
+  <text x="880" y="140" class="pin">Use 3x resistor dividers or a 4-channel bidirectional level shifter</text>
+  <text x="880" y="160" class="pin">Example: 10k (to GND) + 22k (to 5V) per line (adjust values)</text>
+
+  <!-- Audio / PTT box -->
+  <rect x="520" y="320" width="670" height="220" class="box" />
+  <text x="540" y="350" class="label">Audio Interface & PTT to Radio</text>
+  <text x="540" y="380" class="pin">USB Soundcard (audio out) -> isolation transformer (1:1) -> Radio MIC</text>
+  <text x="540" y="400" class="pin">PTT wiring: GPIO21 -> 1k resistor -> Base of NPN (2N2222). Emitter -> GND. Collector -> Radio PTT (to GND).</text>
+  <text x="540" y="420" class="pin">Add diode across radio PTT if needed and pull-ups/pull-downs per manual.</text>
+  <text x="540" y="440" class="pin">Use dummy load while testing transmissions.</text>
+
+  <!-- Ground connection line -->
+  <line x1="200" y1="340" x2="200" y2="420" class="gnd"/>
+  <text x="210" y="380" class="pin">COMMON GND (MT8870, RPi, Radio)</text>
+
+  <!-- Wires from MT8870 to RPi -->
+  <line x1="480" y1="180" x2="520" y2="180" class="wire"/>
+  <text x="500" y="175" class="pin">MT8870 IN -> radio/coupler audio (via capacitor)</text>
+
+  <line x1="480" y1="200" x2="520" y2="200" class="wire"/>
+  <text x="500" y="195" class="pin">MT8870 VCC 5V - DO NOT CONNECT 5V GPIO DIRECTLY</text>
+
+  <!-- D0..D3 connections with note about dividers -->
+  <line x1="470" y1="200" x2="520" y2="200" stroke="#444" stroke-width="2"/>
+  <line x1="470" y1="220" x2="520" y2="220" stroke="#444" stroke-width="2"/>
+  <line x1="470" y1="240" x2="520" y2="240" stroke="#444" stroke-width="2"/>
+  <line x1="470" y1="260" x2="520" y2="260" stroke="#444" stroke-width="2"/>
+
+  <text x="540" y="520" class="label">Notes:</text>
+  <text x="540" y="540" class="label">- Ensure MT8870 GND is common with RPi GND.</text>
+  <text x="540" y="560" class="label">- Use level shifting: MT8870 outputs are 5V TTL; RPi GPIO are 3.3V - use resistive dividers or logic-level converter.</text>
+  <text x="540" y="580" class="label">- Use opto-isolator or transistor for PTT to protect RPi. Check radio PTT polarity (GND or +).</text>
+  <text x="540" y="600" class="label">- For USB camera, use fswebcam or libcamera depending on device; script provided uses fswebcam for USB camera.</text>
+  <text x="540" y="620" class="label">- Test audio levels into radio using attenuators, do NOT overdrive mic input.</text>
+
+  <text x="40" y="820" class="label">Generated: automated diagram - adapt component footprints to your hardware before printing.</text>
+</svg>
