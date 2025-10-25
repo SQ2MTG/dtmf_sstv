@@ -11,5 +11,5 @@ requests~=2.32.3           # do ewentualnych zapytan HTTP, np. zdalne sterowanie
 
 # === System dependencies (install via apt) ===
 # sudo apt update
-# sudo apt install fswebcam sox mpg123
+# sudo apt install fswebcam sox mpg123 alsamixer
 
