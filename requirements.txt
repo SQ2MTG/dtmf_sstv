@@ -12,5 +12,6 @@ requests~=2.32.3           # do ewentualnych zapytan HTTP, np. zdalne sterowanie
 # === System dependencies (install via apt) ===
 # sudo apt update
 # sudo apt install fswebcam sox python3-gpiozero python3-opencv python3-pil python3-flask
+# sudo apt-get install mpg123
 # (opcjonalnie)
 # sudo apt install python3-pyaudio python3-numpy python3-requests
